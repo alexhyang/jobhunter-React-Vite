@@ -1,5 +1,23 @@
+import { Routes, Route } from 'react-router-dom';
+import { Home, Skills, Notes, Posting, NewPosting } from './pages';
+import { Nav, Footer } from './components';
+
 function App() {
-  return <h1>Vite + React</h1>;
+  return (
+    <div className="App">
+      <Nav />
+      <div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/skills" element={<Skills />} />
+          <Route path="/notes" element={<Notes />} />
+          <Route path="/postings" element={<NewPosting />} />
+          <Route path="/postings/:id" element={<Posting />} />
+        </Routes>
+      </div>
+      <Footer />
+    </div>
+  );
 }
 
 export default App;
