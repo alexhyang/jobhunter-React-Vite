@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import baseURL from '../../env';
 
 import { IPostingGet } from '../../interfaces';
 import PostingCard from './PostingCard';
@@ -13,7 +12,7 @@ export default function Posting() {
   const [error, setError] = useState<string>();
   useEffect(() => {
     axios
-      .get(`${baseURL}/api/postings/${id}`)
+      .get(`${import.meta.env.VITE_SERVER_BASE_URL}/api/postings/${id}`)
       .then((response) => {
         setData(response.data);
       })

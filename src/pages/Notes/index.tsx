@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import baseURL from '../../env';
 import { IPostingGet } from '../../interfaces';
 
 import NotesTable from './NotesTable';
@@ -12,7 +11,7 @@ export default function Notes() {
 
   useEffect(() => {
     axios
-      .get(`${baseURL}/api/summaries/notes`)
+      .get(`${import.meta.env.VITE_SERVER_BASE_URL}/api/summaries/notes`)
       .then((response) => {
         setData(response.data);
       })

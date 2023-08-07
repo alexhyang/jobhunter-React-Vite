@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import baseURL from '../../env';
 
 import { IPostingGet } from '../../interfaces';
 import ListingTable from './ListingTable';
@@ -22,7 +21,9 @@ export default function Home() {
   useEffect(() => {
     axios
       .get(
-        `${baseURL}/api/postings?limit=20&sort=-applicationDueDate&fields=${fields.toString()}`
+        `${
+          import.meta.env.VITE_SERVER_BASE_URL
+        }/api/postings?limit=20&sort=-applicationDueDate&fields=${fields.toString()}`
       )
       .then((response) => {
         setData(response.data);
