@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { IPostingGet } from '../../interfaces';
+import { IPostingGet } from '@/interfaces';
 
 export default function ListingTable(props: { data: IPostingGet[] }) {
   const { data } = props;

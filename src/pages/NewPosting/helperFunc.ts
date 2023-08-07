@@ -1,4 +1,4 @@
-import { IFormData, IPostingPost } from '../../interfaces';
+import { IFormData, IPostingPost } from '@/interfaces';
 
 const normalizeFormData = (data: IFormData): IPostingPost => {
   const normalizeTextarea = (text: string): string[] =>

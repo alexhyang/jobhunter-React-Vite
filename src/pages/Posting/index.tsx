@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-import { IPostingGet } from '../../interfaces';
+import { IPostingGet } from '@/interfaces';
 import PostingCard from './PostingCard';
 
 export default function Posting() {

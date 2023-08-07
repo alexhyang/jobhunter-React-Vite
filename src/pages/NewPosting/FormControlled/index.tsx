@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
-import { IPostingPost, IFormData } from '../../../interfaces';
+import { IPostingPost, IFormData } from '@/interfaces';
 import { TYPE_OPTIONS, LEVEL_OPTIONS } from '../formSelectOptions';
 import normalizeFormData from '../helperFunc';
 
@@ -36,7 +36,10 @@ function PostingForm() {
   const onSubmit: SubmitHandler<IFormData> = (data) => {
     const dataNormalized: IPostingPost = normalizeFormData(data);
     axios
-      .post(`${import.meta.env.VITE_SERVER_BASE_URL}/api/postings`, dataNormalized)
+      .post(
+        `${import.meta.env.VITE_SERVER_BASE_URL}/api/postings`,
+        dataNormalized
+      )
       .then((response) => {
         if (response.status === 201) {
           reset();

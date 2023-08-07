@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
-import { Home, Skills, Notes, Posting, NewPosting } from './pages';
-import { Nav, Footer } from './components';
+import { Nav, Footer } from '@components';
+import { Home, Skills, Notes, Posting, NewPosting } from '@pages';
 
 function App() {
   return (

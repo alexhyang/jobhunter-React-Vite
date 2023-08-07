@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { IPostingGet } from '../../interfaces';
+import { IPostingGet } from '@/interfaces';
 
 import NotesTable from './NotesTable';
 

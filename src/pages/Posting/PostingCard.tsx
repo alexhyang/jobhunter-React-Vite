@@ -1,4 +1,4 @@
-import { IPostingGet } from '../../interfaces';
+import { IPostingGet } from '@/interfaces';
 
 export default function PostingCard(props: { data: IPostingGet }) {
   const { data } = props;
