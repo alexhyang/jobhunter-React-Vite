@@ -10,7 +10,13 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   // TODO: remove FormReactBoots later
-  ignorePatterns: ['dist', '.eslintrc.cjs', 'vite.config.ts', 'src/pages/NewPosting/FormReactBoots'],
+  ignorePatterns: [
+    'dist',
+    '.eslintrc.cjs',
+    'tailwind.config.js',
+    'vite.config.ts',
+    'src/pages/NewPosting/FormReactBoots',
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: './tsconfig.json',
