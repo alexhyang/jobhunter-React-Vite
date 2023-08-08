@@ -34,11 +34,12 @@ function PostingForm() {
     });
 
   const onSubmit: SubmitHandler<IFormData> = (data) => {
-    const dataNormalized: IPostingPost = normalizeFormData(data);
+    const dataConverted: IPostingPost =
+      InterfaceMapper.FormDataToPostingPost(data);
     axios
       .post(
         `${import.meta.env.VITE_SERVER_BASE_URL}/api/postings`,
-        dataNormalized
+        dataConverted
       )
       .then((response) => {
         if (response.status === 201) {
@@ -56,14 +57,12 @@ function PostingForm() {
       });
   };
 
-  const formatTextarea = () => {
+  const formatTextarea = (name: 'responsibilities' | 'qualifications') => {
     const convertToHTML = (text: string): string =>
       `- ${text
         .replaceAll(/[-][\s]+/g, '')
         .replace(/(\s*<br>)*[\n]+/g, '\n- ')}`;
-    setValue('responsibilities', convertToHTML(getValues('responsibilities')));
-    setValue('qualifications', convertToHTML(getValues('qualifications')));
-    setFormattedTextarea(true);
+    setValue(name, convertToHTML(getValues(name)));
   };
 
   const addExistingSkill = () => {
@@ -184,6 +183,7 @@ function PostingForm() {
         <textarea
           className="form-control"
           {...register('responsibilities')}
+          onBlur={() => formatTextarea('responsibilities')}
           style={{ height: '250px' }}
         />
       </div>
@@ -192,6 +192,7 @@ function PostingForm() {
         <textarea
           className="form-control"
           {...register('qualifications')}
+          onBlur={() => formatTextarea('qualifications')}
           style={{ height: '250px' }}
         />
       </div>
@@ -232,20 +233,7 @@ function PostingForm() {
 
       <div className="row row-cols-auto mb-3">
         <div className="col">
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={formatTextarea}
-          >
-            Format textarea
-          </button>
-        </div>
-        <div className="col">
-          <button
-            type="submit"
-            className="btn btn-primary"
-            disabled={!formattedTextarea}
-          >
+          <button type="submit" className="btn btn-primary">
             Submit
           </button>
         </div>
