@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { IPostingPost, IFormData } from '@/interfaces';
 import { TYPE_OPTIONS, LEVEL_OPTIONS } from '../formSelectOptions';
-import normalizeFormData from '../helperFunc';
+import { InterfaceMapper } from '@/utils';
 
 function PostingForm() {
   const skillRef = useRef<HTMLInputElement>(null);
