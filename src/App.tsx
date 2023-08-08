@@ -4,9 +4,9 @@ import { Home, Skills, Notes, Posting, NewPosting } from '@pages';
 
 function App() {
   return (
-    <div className="App">
+    <>
       <Nav />
-      <div>
+      <main className="container mx-auto p-3 lg:p-8 w-full">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/skills" element={<Skills />} />
@@ -14,9 +14,9 @@ function App() {
           <Route path="/postings" element={<NewPosting />} />
           <Route path="/postings/:id" element={<Posting />} />
         </Routes>
-      </div>
+      </main>
       <Footer />
-    </div>
+    </>
   );
 }
 

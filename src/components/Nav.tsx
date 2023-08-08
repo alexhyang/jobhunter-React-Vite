@@ -2,40 +2,60 @@ import { NavLink } from 'react-router-dom';
 
 function Nav() {
   return (
-    <div className="Navbar">
-      <div className="container">
-        <NavLink className="navbar-brand" to="/">
+    <header className="bg-gray-100 text-gray-500">
+      <nav
+        className="container mx-auto flex items-center justify-between p-3 lg:px-8"
+        aria-label="Global"
+      >
+        <NavLink className="text-black font-semibold text-lg" to="/">
           Job Hunter
         </NavLink>
-        <div className="Navbar.Toggle" />
-        <div className="Navbar.Collapse">
-          <div className="Nav">
-            <div className="Nav.Link">
-              <a href="https://ca.indeed.com/jobs?q=front+end+developer&l=British+Columbia&fromage=1">
-                Indeed (BC)
-              </a>
-            </div>
-            <div className="Nav.Link">
-              <a href="https://ca.indeed.com/jobs?q=front+end+developer&fromage=1">
-                Indeed (CA)
-              </a>
-            </div>
-            <div className="Nav.Link">
-              <a href="https://www.linkedin.com/jobs/">LinkedIn</a>
-            </div>
-            <NavLink to="skills" className="nav-link">
+        <ul className="flex space-x-5 sm:space-x-3 align-middle">
+          <li>
+            <a
+              href="https://ca.indeed.com/jobs?q=front+end+developer&l=British+Columbia&fromage=1"
+              className="hover:text-gray-800 hover:text-lg"
+            >
+              Indeed (BC)
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://ca.indeed.com/jobs?q=front+end+developer&fromage=1"
+              className="hover:text-gray-800 hover:text-lg"
+            >
+              Indeed (CA)
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/jobs/"
+              className="hover:text-gray-800 hover:text-lg"
+            >
+              LinkedIn
+            </a>
+          </li>
+          <li>
+            <NavLink to="skills" className="hover:text-gray-800 hover:text-lg">
               Skills
             </NavLink>
-            <NavLink to="notes" className="nav-link">
+          </li>
+          <li>
+            <NavLink to="notes" className="hover:text-gray-800 hover:text-lg">
               Notes
             </NavLink>
-            <NavLink to="postings" className="nav-link">
+          </li>
+          <li>
+            <NavLink
+              to="postings"
+              className="hover:text-gray-800 hover:text-lg"
+            >
               Add New Posting
             </NavLink>
-          </div>
-        </div>
-      </div>
-    </div>
+          </li>
+        </ul>
+      </nav>
+    </header>
   );
 }
 

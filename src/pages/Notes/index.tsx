@@ -25,7 +25,7 @@ export default function Notes() {
 
   return (
     <>
-      <h1>Notes</h1>
+      <h1 className="text-3xl font-bold mb-6">Notes</h1>
       {loading && <p>Loading...</p>}
       {data && <NotesTable data={data} />}
       {error && <p>{error}</p>}

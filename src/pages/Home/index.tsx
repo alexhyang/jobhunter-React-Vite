@@ -38,7 +38,7 @@ export default function Home() {
 
   return (
     <>
-      <h1>Postings</h1>
+      <h1 className="text-3xl font-bold mb-6">Postings</h1>
       {loading && <p>Loading...</p>}
       {data && <ListingTable data={data} />}
       {errorMessage && <p>{errorMessage}</p>}

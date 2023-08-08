@@ -22,7 +22,7 @@ function NewPosting() {
 
   return (
     <div>
-      <h1>Add New Posting</h1>
+      <h1 className="text-3xl font-bold mb-6">Add New Posting</h1>
       {/*
       {options.map(({ value }) => (
         <label key={value}>
