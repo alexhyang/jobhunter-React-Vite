@@ -10,7 +10,6 @@ function PostingForm() {
   const skillRef = useRef<HTMLInputElement>(null);
   const [addSkillDisabled, setAddSkillDisabled] = useState<boolean>(true);
   const [uniqueSkills, setUniqueSkills] = useState<string[]>([]);
-  const [formattedTextarea, setFormattedTextarea] = useState<boolean>(false);
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [alertVariant, setAlertVariant] = useState<string>('');
   const [alertMessage, setAlertMessage] = useState<string>('');
@@ -44,7 +43,6 @@ function PostingForm() {
       .then((response) => {
         if (response.status === 201) {
           reset();
-          setFormattedTextarea(false);
           setAlertVariant('success');
           setAlertMessage('Posting added successfully');
           setShowAlert(true);
@@ -103,112 +101,139 @@ function PostingForm() {
     }, 3000);
   }, [alertVariant]);
 
+  const borderStyles =
+    'w-full rounded-md border-gray-300 shadow-sm ' +
+    'focus:border-indigo-300 ' +
+    'focus:ring focus:ring-indigo-200 focus:ring-opacity-50';
+
+  const inputStyles = `form-input ${borderStyles}`;
+  const selectStyles = `form-select ${borderStyles}`;
+  const textStyles = `form-textarea ${inputStyles} rows-10`;
+
+  const buttonStyles =
+    'bg-blue-500 hover:bg-blue-600 text-white font-semibold ' +
+    'py-2 px-4 rounded-md';
+
   return (
     <form className="mb-3" onSubmit={handleSubmit(onSubmit)}>
       {showAlert && (
         <div className={`alert alert-${alertVariant}`}>{alertMessage}</div>
       )}
-
       <div className="mb-3">
-        <label className="form-label">
+        <label>
           URL*
           <input
-            className="form-control"
+            className={inputStyles}
             type="url"
             {...register('postingUrl')}
           />
         </label>
       </div>
-
-      <div className="mb-3 row">
+      <div className="mb-3 columns-3">
         <div className="col">
-          <label className="form-label">Title*</label>
-          <input
-            className="form-control"
-            type="text"
-            {...register('jobTitle')}
-          />
+          <label>
+            Title*
+            <input
+              className={inputStyles}
+              type="text"
+              {...register('jobTitle')}
+            />
+          </label>
         </div>
         <div className="col">
-          <label className="form-label">Company*</label>
-          <input
-            className="form-control"
-            type="text"
-            {...register('company')}
-          />
+          <label>
+            Company*
+            <input
+              className={inputStyles}
+              type="text"
+              {...register('company')}
+            />
+          </label>
         </div>
         <div className="col">
-          <label className="form-label">Location*</label>
-          <input
-            className="form-control"
-            type="text"
-            {...register('location')}
-          />
-        </div>
-      </div>
-
-      <div className="mb-3 row">
-        <div className="col">
-          <label className="form-label">Type*</label>
-          <select className="form-select" {...register('jobType')}>
-            {TYPE_OPTIONS.map((jobType) => (
-              <option key={jobType.id} value={jobType.value}>
-                {jobType.label}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="col">
-          <label className="form-label">Level*</label>
-          <select className="form-select" {...register('jobLevel')}>
-            {LEVEL_OPTIONS.map((jobLevel) => (
-              <option key={jobLevel.id} value={jobLevel.value}>
-                {jobLevel.label}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="col">
-          <label className="form-label">Due Date*</label>
-          <input
-            className="form-control"
-            type="date"
-            {...register('applicationDueDate')}
-          />
+          <label>
+            Location*
+            <input
+              className={inputStyles}
+              type="text"
+              {...register('location')}
+            />
+          </label>
         </div>
       </div>
-
-      <div className="mb-3">
-        <label className="form-label">Responsibilities*</label>
-        <textarea
-          className="form-control"
-          {...register('responsibilities')}
-          onBlur={() => formatTextarea('responsibilities')}
-          style={{ height: '250px' }}
-        />
-      </div>
-      <div className="mb-3">
-        <label className="form-label">Qualifications*</label>
-        <textarea
-          className="form-control"
-          {...register('qualifications')}
-          onBlur={() => formatTextarea('qualifications')}
-          style={{ height: '250px' }}
-        />
+      <div className="mb-3 columns-3">
+        <div className="col">
+          <label>
+            Type*
+            <select className={selectStyles} {...register('jobType')}>
+              {TYPE_OPTIONS.map((jobType) => (
+                <option key={jobType.id} value={jobType.value}>
+                  {jobType.label}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+        <div className="col">
+          <label>
+            Level*
+            <select className={selectStyles} {...register('jobLevel')}>
+              {LEVEL_OPTIONS.map((jobLevel) => (
+                <option key={jobLevel.id} value={jobLevel.value}>
+                  {jobLevel.label}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+        <div className="col">
+          <label>
+            Due Date*
+            <input
+              className={inputStyles}
+              type="date"
+              {...register('applicationDueDate')}
+            />
+          </label>
+        </div>
       </div>
       <div className="mb-3">
-        <label className="form-label">Skills*</label>
-        <input className="form-control" {...register('skills')} />
+        <label>
+          Responsibilities*
+          <textarea
+            className={textStyles}
+            {...register('responsibilities')}
+            onBlur={() => formatTextarea('responsibilities')}
+            style={{ height: '250px' }}
+          />
+        </label>
       </div>
-      <div className="row row-cols-auto mb-3">
-        <div className="col">
+      <div className="mb-3">
+        <label>
+          Qualifications*
+          <textarea
+            className={textStyles}
+            {...register('qualifications')}
+            onBlur={() => formatTextarea('qualifications')}
+            style={{ height: '250px' }}
+          />
+        </label>
+      </div>
+      <div className="mb-3">
+        <label>
+          Skills*
+          <input className={inputStyles} {...register('skills')} />
+        </label>
+      </div>
+      <div className="flex align-middle mb-3">
+        <div className="mr-3">
           <input
-            className="form-control"
+            className={inputStyles}
             ref={skillRef}
             type="text"
             list="skillsList"
           />
-          <datalist id="skillsList">
+          <datalist id="skillsList" className="bg-white text-black">
             {uniqueSkills.map((skill) => (
               <option key={skill} value={skill} />
             ))}
@@ -217,7 +242,7 @@ function PostingForm() {
         <div className="col">
           <button
             type="button"
-            className="btn btn-primary"
+            className={buttonStyles}
             onClick={addExistingSkill}
             disabled={addSkillDisabled}
           >
@@ -225,24 +250,22 @@ function PostingForm() {
           </button>
         </div>
       </div>
-
       <div className="mb-3">
-        <label className="form-label">Other</label>
-        <input className="form-control" {...register('other')} />
+        <label>
+          Other
+          <input className={inputStyles} {...register('other')} />
+        </label>
       </div>
-
-      <div className="row row-cols-auto mb-3">
-        <div className="col">
-          <button type="submit" className="btn btn-primary">
+      <div className="flex">
+        <div className="mr-3">
+          <button type="submit" className={buttonStyles}>
             Submit
           </button>
         </div>
-      </div>
-      <div className="row row-cols-auto">
         <div className="col">
           <button
             type="button"
-            className="btn btn-danger"
+            className={`${buttonStyles} bg-red-600`}
             onClick={() => reset()}
           >
             Reset
