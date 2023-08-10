@@ -1,5 +1,7 @@
 import { NavLink } from 'react-router-dom';
 
+const navLinkStyles = 'hover:text-gray-800 hover:text-black hover:underline';
+
 function Nav() {
   return (
     <header className="bg-gray-100 text-gray-500">
@@ -14,7 +16,7 @@ function Nav() {
           <li>
             <a
               href="https://ca.indeed.com/jobs?q=front+end+developer&l=British+Columbia&fromage=1"
-              className="hover:text-gray-800 hover:text-lg"
+              className={navLinkStyles}
             >
               Indeed (BC)
             </a>
@@ -22,34 +24,28 @@ function Nav() {
           <li>
             <a
               href="https://ca.indeed.com/jobs?q=front+end+developer&fromage=1"
-              className="hover:text-gray-800 hover:text-lg"
+              className={navLinkStyles}
             >
               Indeed (CA)
             </a>
           </li>
           <li>
-            <a
-              href="https://www.linkedin.com/jobs/"
-              className="hover:text-gray-800 hover:text-lg"
-            >
+            <a href="https://www.linkedin.com/jobs/" className={navLinkStyles}>
               LinkedIn
             </a>
           </li>
           <li>
-            <NavLink to="skills" className="hover:text-gray-800 hover:text-lg">
+            <NavLink to="skills" className={navLinkStyles}>
               Skills
             </NavLink>
           </li>
           <li>
-            <NavLink to="notes" className="hover:text-gray-800 hover:text-lg">
+            <NavLink to="notes" className={navLinkStyles}>
               Notes
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="postings"
-              className="hover:text-gray-800 hover:text-lg"
-            >
+            <NavLink to="postings" className={navLinkStyles}>
               Add New Posting
             </NavLink>
           </li>
