@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { IPostingPost, IFormData } from '@/interfaces';
 import { TYPE_OPTIONS, LEVEL_OPTIONS } from '../formSelectOptions';
-import { InterfaceMapper } from '@/utils';
+import { InterfaceMapper, strToBulletPoints } from '@/utils';
 
 function PostingForm() {
   const skillRef = useRef<HTMLInputElement>(null);
@@ -56,11 +56,9 @@ function PostingForm() {
   };
 
   const formatTextarea = (name: 'responsibilities' | 'qualifications') => {
-    const convertToHTML = (text: string): string =>
-      `- ${text
-        .replaceAll(/[-][\s]+/g, '')
-        .replace(/(\s*<br>)*[\n]+/g, '\n- ')}`;
-    setValue(name, convertToHTML(getValues(name)));
+    const prev = getValues(name);
+    const next = strToBulletPoints(prev);
+    setValue(name, next);
   };
 
   const addExistingSkill = () => {
