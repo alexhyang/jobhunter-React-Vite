@@ -19,6 +19,7 @@
     /* Bundler mode */
     "moduleResolution": "node",
     "allowImportingTsExtensions": true,
+    "allowSyntheticDefaultImports": true, // fix ts-jest 151001 issue
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
