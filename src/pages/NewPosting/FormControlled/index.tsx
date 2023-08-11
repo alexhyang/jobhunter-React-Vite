@@ -8,7 +8,7 @@ import { InterfaceMapper, strToBulletPoints } from '@/utils';
 
 function PostingForm() {
   const skillRef = useRef<HTMLInputElement>(null);
-  const [addSkillDisabled, setAddSkillDisabled] = useState<boolean>(true);
+  const [isDisabled, setIsDisabled] = useState<boolean>(true);
   const [uniqueSkills, setUniqueSkills] = useState<string[]>([]);
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [alertVariant, setAlertVariant] = useState<string>('');
@@ -83,7 +83,7 @@ function PostingForm() {
         setUniqueSkills(response.data);
         if (skillRef.current) {
           skillRef.current.placeholder = 'Search Skills here';
-          setAddSkillDisabled(false);
+          setIsDisabled(false);
         }
       })
       .catch(() => {
@@ -103,11 +103,11 @@ function PostingForm() {
     'w-full rounded-md border-gray-300 shadow-sm ' +
     'focus:border-indigo-300 ' +
     'focus:ring focus:ring-indigo-200 focus:ring-opacity-50';
+  const disabledStyles = 'opacity-50 cursor-not-allowed';
 
   const inputStyles = `form-input ${borderStyles}`;
   const selectStyles = `form-select ${borderStyles}`;
   const textStyles = `form-textarea ${inputStyles} rows-10`;
-
   const buttonStyles =
     'bg-blue-500 hover:bg-blue-600 text-white font-semibold ' +
     'py-2 px-4 rounded-md';
@@ -224,12 +224,15 @@ function PostingForm() {
         </label>
       </div>
       <div className="flex align-middle mb-3">
-        <div className="mr-3">
+        <div className="mr-3 w-1/3">
           <input
-            className={inputStyles}
+            className={
+              isDisabled ? `${inputStyles} ${disabledStyles}` : inputStyles
+            }
             ref={skillRef}
             type="text"
             list="skillsList"
+            disabled={isDisabled}
           />
           <datalist id="skillsList" className="bg-white text-black">
             {uniqueSkills.map((skill) => (
@@ -240,9 +243,11 @@ function PostingForm() {
         <div className="col">
           <button
             type="button"
-            className={buttonStyles}
+            className={
+              isDisabled ? `${buttonStyles} ${disabledStyles}` : buttonStyles
+            }
             onClick={addExistingSkill}
-            disabled={addSkillDisabled}
+            disabled={isDisabled}
           >
             Add Skill
           </button>
@@ -263,7 +268,7 @@ function PostingForm() {
         <div className="col">
           <button
             type="button"
-            className={`${buttonStyles} bg-red-600`}
+            className={`${buttonStyles} bg-red-600 hover:bg-red-700`}
             onClick={() => reset()}
           >
             Reset
