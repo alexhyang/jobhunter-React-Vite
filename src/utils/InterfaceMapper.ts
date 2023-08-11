@@ -1,13 +1,8 @@
 import { IFormData, IPostingPost } from '@/interfaces';
+import { extractBulletPoints } from './formatting/stringUtils';
 
 const InterfaceMapper = {
   FormDataToPostingPost: (data: IFormData): IPostingPost => {
-    const stringToList = (text: string): string[] =>
-      text
-        .replaceAll('\n', '')
-        .split('- ')
-        .filter((entry) => entry !== '');
-
     const {
       postingUrl,
       jobTitle,
@@ -29,8 +24,8 @@ const InterfaceMapper = {
       jobType,
       jobLevel,
       applicationDueDate,
-      responsibilities: stringToList(responsibilities),
-      qualifications: stringToList(qualifications),
+      responsibilities: extractBulletPoints(responsibilities),
+      qualifications: extractBulletPoints(qualifications),
       skills: skills.split(/\s*,\s*/).filter((skill) => skill !== ''),
       other,
     };

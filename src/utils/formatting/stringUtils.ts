@@ -1,4 +1,4 @@
-const extractPoints = (text: string): string[] => {
+const extractBulletPoints = (text: string): string[] => {
   return text
     .replace(/\n+/g, '\n')
     .split('\n')
@@ -6,10 +6,12 @@ const extractPoints = (text: string): string[] => {
     .filter((str) => str !== '');
 };
 
-const strToBulletPoints = (text: string): string => {
-  return extractPoints(text)
-    .map((str) => `- ${str}\n`)
-    .join('');
+const formatBulletPoints = (bulletPoints: string[]): string => {
+  return bulletPoints.map((str) => `- ${str}\n`).join('');
 };
 
-export { extractPoints, strToBulletPoints };
+const strToBulletPoints = (text: string): string => {
+  return formatBulletPoints(extractBulletPoints(text));
+};
+
+export { extractBulletPoints, strToBulletPoints };
