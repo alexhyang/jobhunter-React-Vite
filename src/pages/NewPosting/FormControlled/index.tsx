@@ -43,16 +43,20 @@ function PostingForm() {
       .then((response) => {
         if (response.status === 201) {
           reset();
-          setAlertVariant('success');
+          setAlertVariant('alert-success');
           setAlertMessage('Posting added successfully');
           setShowAlert(true);
         }
       })
       .catch(() => {
-        setAlertVariant('danger');
+        setAlertVariant('alert-danger');
         setAlertMessage('Posting added unsuccessfully');
         setShowAlert(true);
       });
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
 
   const formatTextarea = (name: 'responsibilities' | 'qualifications') => {
@@ -115,7 +119,7 @@ function PostingForm() {
   return (
     <form className="mb-3" onSubmit={handleSubmit(onSubmit)}>
       {showAlert && (
-        <div className={`alert alert-${alertVariant}`}>{alertMessage}</div>
+        <div className={`alert ${alertVariant} mb-3`}>{alertMessage}</div>
       )}
       <div className="mb-3">
         <label>
@@ -244,7 +248,9 @@ function PostingForm() {
           <button
             type="button"
             className={
-              isDisabled ? `${buttonStyles} ${disabledStyles}` : buttonStyles
+              isDisabled
+                ? `${buttonStyles} ${disabledStyles} hover:bg-blue-500`
+                : buttonStyles
             }
             onClick={addExistingSkill}
             disabled={isDisabled}
