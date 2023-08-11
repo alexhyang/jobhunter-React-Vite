@@ -32,6 +32,22 @@ function PostingForm() {
       },
     });
 
+  const displayAlert = (variant: string) => {
+    if (variant === 'success') {
+      setAlertVariant('alert-success');
+      setAlertMessage('Posting added!');
+      setShowAlert(true);
+    } else {
+      setAlertVariant('alert-danger');
+      setAlertMessage('Something went wrong!');
+      setShowAlert(true);
+    }
+
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 5000);
+  };
+
   const onSubmit: SubmitHandler<IFormData> = (data) => {
     const dataConverted: IPostingPost =
       InterfaceMapper.FormDataToPostingPost(data);
@@ -43,16 +59,11 @@ function PostingForm() {
       .then((response) => {
         if (response.status === 201) {
           reset();
-          setAlertVariant('alert-success');
-          setAlertMessage('Posting added successfully');
-          setShowAlert(true);
+          displayAlert('success');
         }
       })
-      .catch(() => {
-        setAlertVariant('alert-danger');
-        setAlertMessage('Posting added unsuccessfully');
-        setShowAlert(true);
-      });
+      .catch(() => displayAlert('error'));
+
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
@@ -97,12 +108,6 @@ function PostingForm() {
       });
   }, []);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setShowAlert(false);
-    }, 3000);
-  }, [alertVariant]);
-
   const borderStyles =
     'w-full rounded-md border-gray-300 shadow-sm ' +
     'focus:border-indigo-300 ' +
@@ -127,7 +132,7 @@ function PostingForm() {
           <input
             className={inputStyles}
             type="url"
-            {...register('postingUrl')}
+            {...register('postingUrl', { required: true })}
           />
         </label>
       </div>
@@ -138,7 +143,7 @@ function PostingForm() {
             <input
               className={inputStyles}
               type="text"
-              {...register('jobTitle')}
+              {...register('jobTitle', { required: true })}
             />
           </label>
         </div>
@@ -148,7 +153,7 @@ function PostingForm() {
             <input
               className={inputStyles}
               type="text"
-              {...register('company')}
+              {...register('company', { required: true })}
             />
           </label>
         </div>
@@ -158,7 +163,7 @@ function PostingForm() {
             <input
               className={inputStyles}
               type="text"
-              {...register('location')}
+              {...register('location', { required: true })}
             />
           </label>
         </div>
@@ -167,7 +172,10 @@ function PostingForm() {
         <div className="col">
           <label>
             Type*
-            <select className={selectStyles} {...register('jobType')}>
+            <select
+              className={selectStyles}
+              {...register('jobType', { required: true })}
+            >
               {TYPE_OPTIONS.map((jobType) => (
                 <option key={jobType.id} value={jobType.value}>
                   {jobType.label}
@@ -179,7 +187,10 @@ function PostingForm() {
         <div className="col">
           <label>
             Level*
-            <select className={selectStyles} {...register('jobLevel')}>
+            <select
+              className={selectStyles}
+              {...register('jobLevel', { required: true })}
+            >
               {LEVEL_OPTIONS.map((jobLevel) => (
                 <option key={jobLevel.id} value={jobLevel.value}>
                   {jobLevel.label}
@@ -194,7 +205,7 @@ function PostingForm() {
             <input
               className={inputStyles}
               type="date"
-              {...register('applicationDueDate')}
+              {...register('applicationDueDate', { required: true })}
             />
           </label>
         </div>
@@ -204,7 +215,7 @@ function PostingForm() {
           Responsibilities*
           <textarea
             className={textStyles}
-            {...register('responsibilities')}
+            {...register('responsibilities', { required: true })}
             onBlur={() => formatTextarea('responsibilities')}
             style={{ height: '250px' }}
           />
@@ -215,7 +226,7 @@ function PostingForm() {
           Qualifications*
           <textarea
             className={textStyles}
-            {...register('qualifications')}
+            {...register('qualifications', { required: true })}
             onBlur={() => formatTextarea('qualifications')}
             style={{ height: '250px' }}
           />
@@ -224,7 +235,10 @@ function PostingForm() {
       <div className="mb-3">
         <label>
           Skills*
-          <input className={inputStyles} {...register('skills')} />
+          <input
+            className={inputStyles}
+            {...register('skills', { required: true })}
+          />
         </label>
       </div>
       <div className="flex align-middle mb-3">
