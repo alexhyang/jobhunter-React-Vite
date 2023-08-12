@@ -4,57 +4,56 @@ export default function PostingCard(props: { data: IPostingGet }) {
   const { data } = props;
   return (
     <article>
-      <header>
-        <h2>
+      <header className="mb-3">
+        <h2 className="text-2xl font-bold">
           {data.jobTitle}{' '}
           <span>
-            <a target="_blank" rel="noopener noreferrer" href={data.postingUrl}>
+            <a
+              className="text-blue-600 underline"
+              target="_blank"
+              rel="noopener noreferrer"
+              href={data.postingUrl}
+            >
               link
             </a>
           </span>
         </h2>
         <p>
-          {data.company} -{data.location}
+          {data.jobLevel} ({data.jobType}) @ {data.company} - {data.location}
         </p>
+        <p>{`Due Date: ${data.applicationDueDate.slice(0, 10)}`}</p>
       </header>
       <section>
-        <div>
-          <p>
-            Job Level:
-            {data.jobLevel}
-          </p>
-          <p>
-            Job Type:
-            {data.jobType}
-          </p>
-          <p>{`Due Date: ${data.applicationDueDate.slice(0, 10)}`}</p>
+        <div className="mb-3">
+          <h4 className="text-lg font-bold">Skills</h4>
+          <p>{data.skills.join(', ')}</p>
         </div>
-        <div>
-          <h4>Responsibilities</h4>
-          <ul>
+        <div className="mb-3">
+          <h4 className="text-lg font-bold">Responsibilities</h4>
+          <ul className="pl-4">
             {data.responsibilities.map((elem) => (
-              <li key={elem}>{elem}</li>
+              <li className="list-disc pl-3" key={elem}>
+                {elem}
+              </li>
             ))}
           </ul>
-          <h4>Qualifications</h4>
-          <ul>
-            {data.qualifications.map((elem) => (
-              <li key={elem}>{elem}</li>
-            ))}
-          </ul>
-          <h4>Skills</h4>
-          <ul>
-            {data.skills.map((elem) => (
-              <li key={elem}>{elem}</li>
-            ))}
-          </ul>
-          {data.other && (
-            <>
-              <h4>Notes</h4>
-              <p>{data.other}</p>
-            </>
-          )}
         </div>
+        <div className="mb-3">
+          <h4 className="text-lg font-bold">Qualifications</h4>
+          <ul className="pl-5">
+            {data.qualifications.map((elem) => (
+              <li className="list-disc pl-3" key={elem}>
+                {elem}
+              </li>
+            ))}
+          </ul>
+        </div>
+        {data.other && (
+          <>
+            <h4 className="text-lg font-bold">Notes</h4>
+            <p>{data.other}</p>
+          </>
+        )}
       </section>
     </article>
   );

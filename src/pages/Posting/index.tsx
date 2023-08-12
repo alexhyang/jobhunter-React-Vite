@@ -22,7 +22,7 @@ export default function Posting() {
       .finally(() => {
         setLoading(false);
       });
-  });
+  }, []);
 
   return (
     <>
