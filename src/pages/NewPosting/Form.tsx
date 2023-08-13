@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { IPostingPost, IFormData } from '@/interfaces';
-import { TYPE_OPTIONS, LEVEL_OPTIONS } from '../formSelectOptions';
+import { TYPE_OPTIONS, LEVEL_OPTIONS } from './formSelectOptions';
 import { InterfaceMapper, strToBulletPoints } from '@/utils';
 
 function PostingForm() {
