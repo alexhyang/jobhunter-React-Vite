@@ -19,7 +19,7 @@ export default function ListingTable(props: { data: IPostingGet[] }) {
         {data.map((posting: IPostingGet) => (
           <tr key={posting._id}>
             <td className="text-center p-2">
-              <Link to={`/postings/${posting._id}`}>{posting.jobTitle}</Link>
+              <Link className="underline" to={`/postings/${posting._id}`}>{posting.jobTitle}</Link>
             </td>
             <td className="text-center p-2">{posting.jobLevel}</td>
             <td className="text-center p-2">{posting.company}</td>
